@@ -6,16 +6,20 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Otp } from './pages/Otp';
+import ConProvider from './utils/ContextProvider';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/verify" element={<Otp />} />
-      </Routes>
+      <ConProvider>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/verify" element={<Otp />} />
+        </Routes>
+      </ConProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

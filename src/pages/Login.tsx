@@ -1,12 +1,13 @@
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { auth } from '../firebase';
 import { useNavigate } from 'react-router-dom';
+import myContext from '../utils/Context';
 
 export const Login = () => {
-
+    const context = useContext(myContext);
     const [mobile, setMobile] = useState('8009225514');
     const navigate = useNavigate();
     let appCaptcha: any;
@@ -23,6 +24,7 @@ export const Login = () => {
             const phoneNumber = `+91${mobile}`;
             const confirmationResult = await signInWithPhoneNumber(auth, phoneNumber, appCaptcha);
             console.log(confirmationResult);
+            context?.updateVerify(confirmationResult);
             navigate('/verify');
         } catch (error: any) {
             console.log(error.message);

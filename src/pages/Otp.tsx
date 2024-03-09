@@ -1,11 +1,19 @@
 import { MuiOtpInput } from "mui-one-time-password-input";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import myContext from "../utils/Context";
 
 export const Otp = () => {
-    const [otp, setOtp] = useState('')
+    const [otp, setOtp] = useState('');
+    const context = useContext(myContext);
 
     const handleChange = (newValue: string) => {
         console.log(newValue);
+        context?.verify.confirm(newValue).then((res: any) => {
+            console.log(res);
+        }, (err: any) => {
+            console.log(err);
+        })
+        // console.log(context?.verifyId);
     };
 
     const checkOtp = (val: string) => {
