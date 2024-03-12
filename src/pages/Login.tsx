@@ -18,13 +18,20 @@ export const Login = () => {
         });
     }, [auth])
 
+    const resolveRecaptcha = () => {
+        return new Promise((resolve, reject) => {
+            appCaptcha.verify().then(resolve).catch(reject);
+        });
+    };
+
     async function sendOtp() {
         console.log(mobile);
         try {
             const phoneNumber = `+91${mobile}`;
+            await resolveRecaptcha();
             const confirmationResult = await signInWithPhoneNumber(auth, phoneNumber, appCaptcha);
-            console.log(confirmationResult);
             context?.updateVerify(confirmationResult);
+            appCaptcha.verify();
             navigate('/verify');
         } catch (error: any) {
             console.log(error.message);

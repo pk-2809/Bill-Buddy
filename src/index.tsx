@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Otp } from './pages/Otp';
 import ConProvider from './utils/ContextProvider';
+import { Name } from './pages/Name';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
@@ -18,6 +19,7 @@ root.render(
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/verify" element={<Otp />} />
+          <Route path="/account" element={<Name />} />
         </Routes>
       </ConProvider>
     </BrowserRouter>
